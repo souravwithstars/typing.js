@@ -1,5 +1,5 @@
 const { TypingTest } = require("./typingTest.js");
-const { typingTutor } = require("./typingLibrary.js");
+const { typingTutor } = require("./library.js");
 
 const main = () => {
   process.stdin.setEncoding('utf8');
@@ -13,7 +13,7 @@ const main = () => {
   const startedTime = new Date().getTime();
 
   process.stdin.on('data', character => {
-    return typingTutor(test, startedTime, character);
+    typingTutor(test, startedTime, character);
   });
 };
 

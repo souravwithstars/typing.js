@@ -2,23 +2,32 @@ const isDone = (sentence) => {
   return sentence.getQuoteLength() <= sentence.getResponseLength();
 };
 
-const displayProgress = (test) => {
+const displayResult = (entry, value, unit) => {
+  console.log(`${entry} : ${value}${unit}`);
+};
+
+const displayAccuracyAndSpeed = (test, timeGap) => {
+  const accuracy = test.getAccuracy();
+  const speed = test.getSpeed(timeGap);
+
+  process.stdout.cursorTo(0, 3);
+  displayResult('\nAccuracy', accuracy, '%');
+  displayResult('Speed', speed, 'wpm');
+};
+
+const displayProgress = (test, timeGap) => {
   console.clear();
 
   console.log(test.getQuote());
   process.stdout.write(test.getResponse());
-};
+  displayAccuracyAndSpeed(test, timeGap);
 
-const displayResult = (entry, value, unit) => {
-  console.log(`\n${entry} : ${value}${unit}`);
+  const xCoordinate = test.getResponseLength();
+  process.stdout.cursorTo(xCoordinate, 1);
 };
 
 const processInput = (test, timeGap) => {
-  const accuracy = test.getAccuracy();
-  const speed = test.getSpeed(timeGap);
-
-  displayResult('Accuracy', accuracy, '%');
-  displayResult('Speed', speed, 'wpm');
+  displayAccuracyAndSpeed(test, timeGap);
   process.exit();
 };
 
@@ -44,7 +53,7 @@ const typingTutor = (test, startedTime, character) => {
     test.addResponse(character);
   }
 
-  displayProgress(test);
+  displayProgress(test, timeGap);
 
   if (isDone(test)) {
     processInput(test, timeGap);

@@ -40,12 +40,12 @@ class TypingTest {
   }
 
   getAccuracy() {
-    const actualArray = this.getQuote().split('');
+    const quoteArray = this.getQuote().split('');
     const responseArray = this.getResponse().split('');
 
     let count = 0;
     responseArray.forEach((char, i) => {
-      if (actualArray[i] === char) {
+      if (quoteArray[i] === char) {
         count += 1;
       }
     })
