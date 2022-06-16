@@ -28,7 +28,7 @@ const displayProgress = (test, timeGap) => {
 
 const processInput = (test, timeGap) => {
   displayAccuracyAndSpeed(test, timeGap);
-  process.exitCode = 0;
+  process.stdin.destroy();
 };
 
 const isCtrlC = (character) => {
